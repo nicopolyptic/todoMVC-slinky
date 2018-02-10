@@ -16,6 +16,7 @@ object AppCircuit extends Circuit[AppModel] {
 class FilterHandler[M](modelRW: ModelRW[M, TodoFilter]) extends ActionHandler(modelRW) {
   override protected def handle  = {
     case SelectFilter(f) => updated(f)
+    case ClearCompleted => updated(TodoFilter.All)
   }
 }
 
