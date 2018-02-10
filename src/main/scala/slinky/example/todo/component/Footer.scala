@@ -3,7 +3,7 @@ package slinky.example.todo.component
 import slinky.example.todo.model.TodoFilter
 import slinky.example.todo.model.ClearCompleted
 import diode.Dispatcher
-import slinky.core.{Component, StatelessComponent}
+import slinky.core.StatelessComponent
 import slinky.core.annotations.react
 import slinky.web.html._
 
