@@ -21,7 +21,7 @@ import scala.scalajs.js.Dynamic.literal
   def render() =
     footer(
       className := "footer",
-      style := literal(display = if (props.activeCount + props.completedCount == 0) "none" else ""), // set #110
+      style := literal(display = if (props.activeCount + props.completedCount == 0) "none" else ""), // see Issue #110 for using Option instead.
       )(
       span(
         className := "todo-count")(
