@@ -20,7 +20,7 @@ class FilterHandler[M](modelRW: ModelRW[M, TodoFilter]) extends ActionHandler(mo
   }
 }
 
-class EditTodoHandler[M](modelRW: ModelRW[M, Option[TodoId]]) extends ActionHandler(modelRW) {
+class EditTodoHandler[M](modelRW: ModelRW[M, Option[Todo.Id]]) extends ActionHandler(modelRW) {
   override protected def handle  = {
     case StartEditingTodo(id) => updated(Some(id))
     case EditingDone(id) => updated(None)
@@ -29,7 +29,7 @@ class EditTodoHandler[M](modelRW: ModelRW[M, Option[TodoId]]) extends ActionHand
 
 class TodoHandler[M](modelRW: ModelRW[M, Seq[Todo]]) extends ActionHandler(modelRW) {
 
-  def updateOne(Id: TodoId)(f: Todo => Todo): Seq[Todo] =
+  def updateOne(Id: Todo.Id)(f: Todo => Todo): Seq[Todo] =
     value.map {
       case found @ Todo(Id, _, _) => f(found)
       case other                  => other
@@ -37,9 +37,9 @@ class TodoHandler[M](modelRW: ModelRW[M, Seq[Todo]]) extends ActionHandler(model
 
   override def handle = {
     case InitTodos =>
-      updated(List(Todo(TodoId.random, "Test your code!", false)))
+      updated(List(Todo(Todo.randomId, "Test your code!", false)))
     case AddTodo(title) =>
-      updated(value :+ Todo(TodoId.random, title, false))
+      updated(value :+ Todo(Todo.randomId, title, false))
     case ToggleAll(checked) =>
       updated(value.map(_.copy(isCompleted = checked)))
     case ToggleCompleted(id) =>

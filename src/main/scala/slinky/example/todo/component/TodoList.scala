@@ -1,10 +1,6 @@
 package slinky.example.todo.component
 
-import slinky.example.todo.model.TodoId
-import slinky.example.todo.model.Todos
-import slinky.example.todo.model.TodoFilter
-import slinky.example.todo.model.AddTodo
-import slinky.example.todo.model.ToggleAll
+import slinky.example.todo.model._
 import diode.Dispatcher
 import diode.ModelRO
 import slinky.core.Component
@@ -19,7 +15,7 @@ import org.scalajs.dom.raw.HTMLInputElement
 @react class TodoList extends Component {
 
   case class Props(todos: ModelRO[Todos], dispatch: Dispatcher)
-  case class State(editing: Option[TodoId])
+  case class State(editing: Option[Todo.Id])
 
   override def initialState = State(None)
 
@@ -56,8 +52,8 @@ import org.scalajs.dom.raw.HTMLInputElement
         className := "todo-list")(
         props.todos.value.todoList.filter(props.todos.value.filter.accepts).map(
           todo => {
-            val editing = props.todos.value.editingTodo.exists(_.id == todo.id.id)
-            div(key := todo.id.id.toString)(TodoView(props.dispatch, todo, editing ))
+            val editing = props.todos.value.editingTodo.exists(_ == todo.id)
+            div(key := todo.id.toString)(TodoView(props.dispatch, todo, editing ))
           }
         )
       )

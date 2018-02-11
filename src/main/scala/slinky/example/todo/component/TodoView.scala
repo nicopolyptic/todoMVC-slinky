@@ -23,7 +23,7 @@ import org.scalajs.dom.raw.HTMLInputElement
   override def initialState = State(props.todo.title)
   def render() = {
     li(
-      key := props.todo.id.id.toString,
+      key := props.todo.id.toString,
       className := s"${if (props.editing) "editing" else ""} ${if (props.todo.isCompleted) "completed" else ""}")(
       div(
         className := "view")(
