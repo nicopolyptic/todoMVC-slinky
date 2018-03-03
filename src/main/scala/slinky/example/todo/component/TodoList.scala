@@ -36,7 +36,7 @@ import org.scalajs.dom.raw.HTMLInputElement
           )
       ),
       todoList(),
-      footer(activeCount, completedCount)
+      if (todos.length > 0) Some(footer(activeCount, completedCount)) else None
     )
   }
 
